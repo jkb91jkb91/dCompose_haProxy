@@ -1,29 +1,36 @@
 DOCKER COMPOSE PROJECT WITH HAPROXY
 
 
-4 services
-HAPROXY
-WEBAPP
-WEBAPP
-WEBAPP
 
-1.You have to create manually docker network
+STEP 1 >>> 2 SEPARATES CONTAINERS
+1Create Dockerfile.haproxy
 
-docker create network frontend >>>>> because in docker-compose.yml you have
-networks:
-  frontend:
-    external: 
-      name: frontend
+  1 FROM haproxy:2.3
+  2 COPY /haproxy/haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
+
+docker build -t hape -f Dockerfile.haproxy .
+docker run -d -p 80:8080 --name jes5 hapek
+
+haproxy.cfg
+global
+    daemon
+    log /srv/logs/haproxy local0
+    log /srv/logs/haproxy local1 notice
+    maxconn 10000 # Przykładowa zmniejszona wartość maxconn
+defaults
+    mode    http
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+    option http-keep-alive
+
+frontend http-in
+    bind *:80
+    use_backend web1_be 
 
 
-2.docker inspect HASH >> for every container
+backend web1_be
+    server 172.17.0.3 172.17.0.3:80   << this is IP of apache container
 
-3.Fill in etc hosts with domain mapping
 
-172.22.0.5  web1.devnotes.it.
-172.22.0.2  web2.devnotes.it.
-172.22.0.4  web3.devnotes.it.
 
-domain nane mapping has to have "." in the end . remember about that
-
-If you haProxy container has adress 172.22.0.3 it should load balance every of these IP
