@@ -3,11 +3,13 @@ DOCKER COMPOSE PROJECT WITH HAPROXY
 
 
 STEP 1 >>> 2 SEPARATES CONTAINERS  
-1Create Dockerfile.haproxy  
 
-  1 FROM haproxy:2.3  
-  2 COPY /haproxy/haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg  
 
+Dockerfile.haproxy  
+  FROM haproxy:2.3  
+  COPY /haproxy/haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg  
+
+<b>COMMANDS<b>  
 docker build -t hape -f Dockerfile.haproxy .  
 docker run -d -p 80:8080 --name jes5 hapek  
 
