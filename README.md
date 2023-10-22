@@ -9,7 +9,7 @@ Dockerfile.haproxy
   FROM haproxy:2.3  
   COPY /haproxy/haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg  
 
-<b>COMMANDS<b>  
+<b>COMMANDS</b>  
 docker build -t hape -f Dockerfile.haproxy .  
 docker run -d -p 80:8080 --name jes5 hapek  
 
