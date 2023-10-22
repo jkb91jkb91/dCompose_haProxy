@@ -6,29 +6,35 @@ networks:
       name: frontend
 
 services:
-  hp:
-    build: .
-    container_name: hp
-    command: sleep infinity
+  centek:
+    build:
+      context: .
+      dockerfile: Dockerfile.haproxy
+    hostname: centek
     ports:
     - 80:80
     networks: 
         - frontend
+    volumes:
+      - ./haproxy_compose/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
 
   web1_app:
     image: tutum/hello-world
     container_name: web1_app
+    hostname: web1_app
     networks: 
         - frontend
 
   web2_app:
     image: tutum/hello-world
     container_name: web2_app
+    hostname: web2_app
     networks: 
       - frontend
 
   web3_app:
     image: tutum/hello-world
+    hostname: web3_app
     container_name: web3_app
     networks: 
       - frontend
