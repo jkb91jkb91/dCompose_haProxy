@@ -5,7 +5,7 @@ DOCKER COMPOSE PROJECT WITH HAPROXY
 STEP 1 >>> 2 SEPARATES CONTAINERS  
 
 
-Dockerfile.haproxy  
+<b>Dockerfile.haproxy</b>    
   FROM haproxy:2.3  
   COPY /haproxy/haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg  
 
